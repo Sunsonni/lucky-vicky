@@ -3,13 +3,21 @@ import { ref, shallowRef } from 'vue';
 
 import RandomNumber from './components/RandomNumber.vue';
 import CoinFlip from './components/CoinFlip.vue';
-import Magic8Ball from './Magic8Ball.vue';
+import Magic8Ball from './components/Magic8Ball.vue';
+import WheelOfNames from './components/WheelOfNames.vue';
 
+const tabs = [
+  { name: "Random Number Generator", component: RandomNumber},
+  { name: "Coin Flip", component: CoinFlip},
+  { name: "Magic 8 Ball", component: Magic8Ball},
+  { name: "Wheel of Names", component: WheelOfNames},
+]
 
 const header = ref('Random Number Generator');
 const error = ref('')
 
-const activeTab = shallowRef('RandomNumber');
+const activeTab = shallowRef(tabs[0].component);
+
 
 </script>
 
@@ -22,25 +30,12 @@ const activeTab = shallowRef('RandomNumber');
           <button 
             role="tab" 
             class="tab"
-            @click="activeTab = RandomNumber; header = 'Random Number Generator'"
+            v-for="tab in tabs"
+            :class="{ 'tab-active': activeTab === tab.component }"
+            @click="activeTab = tab.component; header = tab.name"
           >
-            Random Number
+            {{ tab.name }}
           </button>
-          <button 
-            role="tab" 
-            class="tab"
-            @click="activeTab = CoinFlip; header = 'Coin Flip'"
-          >
-            CoinFlip
-          </button>
-          <button 
-            role="tab" 
-            class="tab"
-            @click="activeTab = Magic8Ball; header = 'Magic 8 Ball'"
-          >
-            Magic 8 Ball
-          </button>
-          <a role="tab" class="tab">Tab 4</a>
         </div>
       </div>
        <div class="card-body">
