@@ -2,3 +2,20 @@
 @plugin "daisyui";
 
 
+
+.flip{
+ animation: spin .5s ease-in-out;
+ backface-visibility: hidden;
+}
+
+@keyframes spin{
+
+ from{
+  transform: rotateY(0deg);
+ }
+
+ to{
+  transform: rotateY(720deg);
+ }
+
+}
